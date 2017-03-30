@@ -13,7 +13,7 @@
     "dhis": {
       "href": "..",
       "auth": "admin:district",
-      "devHref": "http://localhost:8080"
+      "devHref": "http://localhost:8080/dhis"
     }
   }
 }

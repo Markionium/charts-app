@@ -14,6 +14,8 @@ import { Layout } from './api/Layout';
 import { LayoutWindow } from './ui/LayoutWindow.js';
 import { OptionsWindow } from './ui/OptionsWindow.js';
 
+import audiolizr from './audiolizr';
+
 // override
 override.extOverrides();
 
@@ -138,13 +140,28 @@ requestManager.add(new api.Request(refs, init.dimensionsInit(refs)));
 requestManager.add(new api.Request(refs, init.dataApprovalLevelsInit(refs)));
 requestManager.add(new api.Request(refs, init.userFavoritesInit(refs)));
 
-requestManager.set(initialize);
-requestManager.run();
+function startApp() {
+    const readyButton = document.querySelector('#init .ready-button');
+    console.log('App loaded ready to start!');
 
+    // enable ready button
+    readyButton.disabled = false;
+
+    // Start the app when the user is ready!
+    readyButton
+        .addEventListener('click', () => {
+            initialize();
+        });
+}
+
+requestManager.set(startApp); 
+ // Disable automatic request runner, we'll run these requests when the user watched the intro video and clicked ready
+requestManager.run();
 });});});});
 
-function initialize() {
+const audiolize = audiolizr(appManager);
 
+function initialize() {
     // i18n init
     var i18n = i18nManager.get();
 
@@ -155,8 +172,10 @@ function initialize() {
     // ui config
     uiConfig.checkout('aggregate');
 
+    const audiolize2 = audiolize(i18n);
+
     // app manager
-    appManager.appName = i18n.data_visualizer || 'Data Visualizer';
+    appManager.appName = i18n.data_visualizer || 'DHIS2NZ - Data Audiolizer';
 
     instanceManager.setFn(function(layout) {
 
@@ -192,7 +211,7 @@ function initialize() {
     });
 
     // ui manager
-    uiManager.disableRightClick();
+    // uiManager.disableRightClick();
 
     uiManager.enableConfirmUnload();
 
@@ -311,6 +330,8 @@ function initialize() {
             }
         }
     });
+
+    audiolize2();
 }
 
 global.refs = refs;

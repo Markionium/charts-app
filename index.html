@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DHIS 2 Data Visualizer</title>
+    <title>DHIS2NZ - Data Audiolizer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1"/>
+
+    <style type="text/css">
+        body {
+            opacity: 1 !important;
+            background-color: #1d5288;
+        }
+    </style>
+    <link href="audiolizr/style.css" rel="stylesheet" type="text/css"" />
 </head>
 <body>
 <div id="init">
-    <div id="inittext"><span class="brand">DHIS 2</span>Data Visualizer</div>
-    <div class="spinner"></div>
+    <div class="youtube-placeholder">
+    </div>
+    <div class="buttons">
+        <button disabled class="ready-button">I'm ready!!! Go go go!</button>
+    </div>
+    <div class="logo">
+        <img height="200" src="images/dhis2nzlogo.png" />
+    </div>
 </div>
 
 <form id="exportForm" method="post">
@@ -30,5 +44,10 @@
 <script type="text/javascript" src="extjs/ext-overrides/ext-override-loadmask.js"></script>
 
 <script src="app.js"></script>
+<div id="audiolizr" class="audiolizr"></div>
+
+<wrap id="left" class="speaker speaker-left"><img src="images/speaker.png" id="ext-gen1015"></wrap>
+<wrap id="right" class="speaker speaker-right"><img src="images/speaker.png" id="ext-gen1016"></wrap>
+
 </body>
 </html>

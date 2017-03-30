@@ -6,6 +6,12 @@ webpackBaseConfig.devServer = {
     colors: true,
     port: 8081,
     inline: true,
+
+    proxy: {
+        '/images/dhis2nzlogo.png': 'http://localhost:8081/src',
+        '/images/speaker.png': 'http://localhost:8081/src',
+        '/audiolizr/style.css': 'http://localhost:8081/src',
+    }
 };
 
 module.exports = webpackBaseConfig;
