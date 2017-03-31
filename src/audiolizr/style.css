@@ -30,7 +30,7 @@ body {
 #init {
     display: table;
     color:rgb(255, 255, 255);
-    margin: 3rem auto 0 !important;
+    margin: 10% auto 0 !important;
     font-size: 13px;
     color: #444;
 }
@@ -48,14 +48,11 @@ body {
     font-weight: bold;
 }
 
-.youtube-placeholder {
-    min-width: 750px;
-    min-height: 500px;
-    background: red;
-}
-
 .ready-button {
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: baseline;
 }
 
 #init .brand, #pre-init .brand {
@@ -93,12 +90,19 @@ body {
     transition: .5s left linear;
 }
 
+.speaker img {
+    width: 250px;
+    height: 250px;
+}
+
 .speaker-left {
-    left: 3rem;
+    left: 0;
+    bottom: 25%;
 }
 
 .speaker-right {
-    right: 3rem;
+    right: 0;
+    bottom: 25%;
 }
 
 .speaker-right img {
