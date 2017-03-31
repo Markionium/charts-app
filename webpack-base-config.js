@@ -19,7 +19,7 @@ module.exports = {
                 include: [
                     path.resolve(__dirname, 'src/'),
                 ],
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     cacheDirectory: true,
                     presets: ['es2015', 'stage-2', 'react'],

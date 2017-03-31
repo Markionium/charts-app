@@ -144,7 +144,14 @@ function startApp() {
     const readyButton = document.querySelector('#init .ready-button');
     console.log('App loaded ready to start!');
 
-    readyButton.style.opacity = 1;
+    if (localStorage.getItem('first-run-dhis2nz')) {
+        readyButton.style.opacity = 1;
+    } else {
+        localStorage.setItem('first-run-dhis2nz', true);
+        setTimeout(() => {
+            readyButton.style.opacity = 1;
+        }, 10000);
+    }
 
     window.initialize = initialize;
 
