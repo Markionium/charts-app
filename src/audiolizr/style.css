@@ -5,7 +5,7 @@
 
     25% {
         transform: scale(0.9, .9);
-        bottom: 28px;
+        bottom: 73px;
     }
 
     50% {
@@ -14,7 +14,7 @@
 
     75% {
         transform: scale(1.1, 1.1);
-        bottom: 32px;
+        bottom: 77px;
     }
 
     100% {
@@ -46,6 +46,13 @@ body {
     padding: 1rem;
     font-size:  1.2rem;
     font-weight: bold;
+    opacity: 0;
+    border-radius: .5rem;
+    background-color: goldenrod;
+    color: white;
+    border: 1px solid darkgoldenrod;
+    margin: .5rem;
+    box-shadow: 1 1 5px black;
 }
 
 .ready-button {
@@ -115,13 +122,13 @@ body {
 
 .speaker-left.speaker__chart-loaded {
     top: initial;
-    bottom: 30px;
+    bottom: 75px;
     left: -46px;
 }
 
 .speaker-right.speaker__chart-loaded {
     top: initial;
-    bottom: 30px;
+    bottom: 75px;
     right: -46px;
 }
 
@@ -140,6 +147,8 @@ body {
 .audiolizr--root {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    background-color: #1d5288;
 }
 
 .audiolizr--player {
@@ -148,7 +157,7 @@ body {
 
 .audiolizr--tooltip {
     color: white;
-    background: darkred;
+    background: goldenrod;
     position: fixed;
     width: 400xp;
     right: 15px;
@@ -226,26 +235,26 @@ body {
 /**
  * Hack the player css to not show the video
  */
-.plyr__video-embed {
+body .plyr .plyr__video-embed {
     display: none;
 }
 
-.plyr .plyr__play-large {
+body .plyr .plyr__play-large {
     display: none;
 }
 
-.plyr--video .plyr__controls {
+body .plyr--video .plyr__controls {
     position: initial;
     opacity: 1;
     background: #1d5288;
     padding: 5px;
 }
 
-button[data-plyr="fullscreen"] {
+body button[data-plyr="fullscreen"] {
     display: none;
 }
 
-.plyr--captions-enabled [data-plyr=captions], .plyr--fullscreen-enabled [data-plyr=fullscreen] {
+body .plyr--captions-enabled [data-plyr=captions], .plyr--fullscreen-enabled [data-plyr=fullscreen] {
     display: none;
 }
 
@@ -273,8 +282,140 @@ Ext overrides
     color: transparent !important;
 }
 
+
+.x-mask {
+    z-index: 950 !important;
+}
+
+.x-mask-msg {
+    z-index: 950 !important;
+}
+
 .x-mask-msg.x-mask-msg-default.x-layer {
     left: 40% !important;
     top: 50% !important;
     width: 200px;
+}
+
+/**
+Falling notes
+*/
+
+
+@keyframes fallingNotes {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0px) rotateZ(0deg);
+        transform: translate(0, 0px) rotateZ(0deg);
+    }
+    75% {
+        opacity: 1;
+        -webkit-transform: translate(100px, 600px) rotateZ(270deg);
+        transform: translate(100px, 600px) rotateZ(270deg);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translate(150px, 800px) rotateZ(360deg);
+        transform: translate(150px, 800px) rotateZ(360deg);
+    }
+}
+
+.falling-notes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
+}
+
+.falling-notes span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: -280px 40px 54px -34px;
+    background:url("../images/musicnote.png");
+    background-size: 80px 80px;
+    -webkit-animation: fallingNotes 10s infinite linear;
+    -moz-animation: fallingNotes 10s infinite linear;
+    animation: fallingNotes 10s infinite linear;
+}
+
+/* 5, 10, 15, 20 */ 
+.falling-notes span:nth-child(5n+5) {
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+/* 2, 5, 8, 11, 13 */ 
+.falling-notes span:nth-child(3n+2) {
+    -webkit-animation-delay: 4s;
+    -moz-animation-delay: 4s;
+    animation-delay: 4s;
+}
+/* 7, 9, 11, 13 */ 
+.falling-notes span:nth-child(2n+5) {
+    -webkit-animation-delay: 8s;
+    -moz-animation-delay: 8s;
+    animation-delay: 8s;
+}
+
+.nowplaying {
+    position: fixed;
+    z-index: 30000;
+    top: 25%;
+    right: 30%;
+}
+
+.nowplaying--header {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    background-color: #1d5288;
+    padding: 2rem;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.nowplaying--header h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 2rem;
+}
+
+.nowplaying--header img {
+    height: 51px;
+}
+
+.nowplaying-enter {
+  opacity: 0.01;
+  right: 20%;
+}
+
+.nowplaying-enter.nowplaying-enter-active {
+  opacity: 1;
+  right: 30%;
+  transition: right 500ms ease-in, opacity 500ms ease-in;
+}
+
+.nowplaying-leave {
+  opacity: 1;
+  right: 30%;
+}
+
+.nowplaying-leave.nowplaying-leave-active {
+  opacity: 0.01;
+  transition: right 500ms ease-in, opacity 500ms ease-in;
+  right: 20%;
+}
+
+.nowplaying-appear {
+  opacity: 0.01;
+  right: 20%;
+}
+
+.nowplaying-appear.example-appear-active {
+  opacity: 1;
+  right: 30%;
+  transition: right 500ms ease-in, opacity 500ms ease-in;
 }

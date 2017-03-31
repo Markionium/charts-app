@@ -7,7 +7,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js src `git diff --cached --name-only | grep \\.js$`",
     "validate": "npm ls --depth 0",
     "start": "webpack-dev-server",
-    "build": "rm -rf build && webpack --config webpack.config.prod.js && cp ./index.html build && cp ./jquery.min.js build && cp ./manifest.webapp build && cp -r i18n build && cp -r dhis2 build && cp -r extjs build"
+    "build": "rm -rf build && webpack --config webpack.config.prod.js && cp ./index.html build && cp ./jquery.min.js build && cp ./manifest.webapp build && cp -r i18n build && cp -r dhis2 build && cp -r extjs build && cp -r src/images build && cp -r src/audiolizr build"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "material-ui": "^0.17.1",
     "plyr": "^2.0.12",
     "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
     "recompose": "^0.22.0",

@@ -13,6 +13,17 @@ export default function audiolizr(appManager) {
             document.getElementById('audiolizr')
         );
 
+        const musicNotes = document.createElement('div');
+        musicNotes.classList.add('falling-notes');
+
+        const notes = new Array(25).fill('<span></span>').join('');
+
+        musicNotes.innerHTML = notes;
+
+
+        document.querySelector('body')
+            .appendChild(musicNotes);
+
         appManager.appName = i18n.data_visualizer = 'Data Audiolizer';
 
         return function () {

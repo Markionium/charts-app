@@ -144,13 +144,20 @@ function startApp() {
     const readyButton = document.querySelector('#init .ready-button');
     console.log('App loaded ready to start!');
 
-    // enable ready button
-    readyButton.disabled = false;
+    readyButton.style.opacity = 1;
+
+    window.initialize = initialize;
 
     // Start the app when the user is ready!
     readyButton
         .addEventListener('click', () => {
-            initialize();
+            window.requestAnimationFrame(() => {
+                readyButton.innerHTML = 'Loading...';
+
+                window.requestAnimationFrame(() => {
+                    initialize();
+                });
+            });
         });
 }
 

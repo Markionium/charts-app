@@ -9,6 +9,7 @@ webpackBaseConfig.devServer = {
 
     proxy: {
         '/images/dhis2nzlogo.png': 'http://localhost:8081/src',
+        '/images/musicnote.png': 'http://localhost:8081/src',
         '/images/speaker.png': 'http://localhost:8081/src',
         '/audiolizr/style.css': 'http://localhost:8081/src',
     }

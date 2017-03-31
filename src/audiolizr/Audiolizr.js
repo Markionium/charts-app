@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import plyr from 'plyr';
 import 'plyr/dist/plyr.css';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
 import ListIcon from 'material-ui/svg-icons/av/library-music';
@@ -23,8 +22,10 @@ import { favorites$ } from './favorites';
 import { playTune, player$ } from './player';
 import Dhis2nzLogo from './Dhis2nzLogo';
 import songs$ from './songs';
+import EnterYoutubeLink from './EnterYoutubeLink';
+import NowPlaying from './NowPlaying';
 
-player$.subscribe(song => console.log(song));
+player$.subscribe(song => window.console && console.log(song));
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -32,6 +33,7 @@ setObservableConfig(rxjsconfig);
 injectTapEventPlugin();
 
 let player;
+let eventsSet = false;
 class AudioPlayer extends Component {
     constructor(props, context) {
         super(props, context);
@@ -55,15 +57,30 @@ class AudioPlayer extends Component {
         console.log('load', nextProps.player.id);
 
         try {
-        player.source({
-            type:       'video',
-            title:      'Example title',
-            sources: [{
-                src:    nextProps.player.id,
-                type:   'youtube'
-            }]
-        });
+            player.source({
+                type:       'video',
+                title:      'Example title',
+                sources: [{
+                    src:    nextProps.player.id,
+                    type:   'youtube'
+                }]
+            });
+
+            if (!eventsSet) {
+                player.on('play', function(event) {
+                    speakers.blastIt();
+                });
+
+                player.on('pause', function(event) {
+                    speakers.beBoring();
+                });
+            }
+
+            // Turn the speakers on!
+            setTimeout(() => speakers.blastIt(), 1500);
+
         } catch (e) {
+            // When testing offline this will be called.... or when offline.. :P
             alert('No youtube! :( please e-mail jan@dhis2.org');
         }
     }
@@ -76,7 +93,7 @@ class AudioPlayer extends Component {
                     id="plyr-player"
                     ref={this.setRef}
                     data-type="youtube"
-                    data-video-id="Ys304bfdo2g"
+                    data-video-id="vhqnIWyNV6c"
                 ></div>
             </div>
         );
@@ -123,7 +140,7 @@ const customContentStyle = {
 
 const Title = ({children}) => (<h1 className="audiolizr--overlay--title">{children}</h1>);
 
-function Overlay({ open, actions, children }) {
+function Overlay({ open, actions, children, onRequestClose }) {
     if (!open) {
         return null;
     }
@@ -140,24 +157,26 @@ function Overlay({ open, actions, children }) {
             </div>
             <div className="audiolizr--overlay--content">
                 <Title>Welcome from all of us at DHIS2! Pick a tune to get started :)</Title>
+                <EnterYoutubeLink onClose={onRequestClose} />
                 {children}
             </div>
         </div>
     );
 }
 
-function TunezControls({ open, onRequestClose, onListClick, songs }) {
+function TunezControls({ open, onRequestClose, onListClick, songs, showTooltip }) {
     return (
         <div>
-            <div className="audiolizr--tooltip">
+            {showTooltip ? <div className="audiolizr--tooltip">
                 Analyse more data with 2NZ here!!!
                 <DownArrow color="white" style={{ width: '50px', height: '50px' }} />
-            </div>
+            </div>: null}
             <IconButton onClick={onListClick} style={{ width: '75px', width: '75px' }} iconStyle={{ width: '50px', height: '50px' }}>
-                <ListIcon color="black" />
+                <ListIcon color="white" />
             </IconButton>
             <Overlay
                 open={open}
+                onRequestClose={onRequestClose}
                 actions={[
                     <IconButton onClick={onRequestClose}>
                         <CloseIcon color="white" />
@@ -186,9 +205,13 @@ const songsWithFavorites$ = songs$
 
 const AudiolizrTunezControls = compose(
     withState('open', 'setOpen', true),
+    withState('showTooltip', 'setShowTooltip', true),
     withHandlers({
         onRequestClose: ({ setOpen }) => () => setOpen(false),
-        onListClick: ({ setOpen }) => () => setOpen(true),
+        onListClick: ({ setOpen, setShowTooltip }) => () => {
+            setShowTooltip(false);
+            setOpen(true);
+        },
     }),
     mapPropsStream(props$ => props$
         .combineLatest(
@@ -225,6 +248,7 @@ export default function Audiolizr() {
             <div className="audiolizr--root">
                 <AudioPlayerForTunez />
                 <AudiolizrTunezControls />
+                <NowPlaying />
             </div>
         </MuiThemeProvider>
     );
