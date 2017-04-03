@@ -67,13 +67,17 @@ class AudioPlayer extends Component {
             });
 
             if (!eventsSet) {
-                player.on('play', function(event) {
-                    speakers.blastIt();
-                });
+                try {
+                    player.on('play', function(event) {
+                        speakers.blastIt();
+                    });
 
-                player.on('pause', function(event) {
-                    speakers.beBoring();
-                });
+                    player.on('pause', function(event) {
+                        speakers.beBoring();
+                    });
+                } catch (e) {
+                    // No speakers when the requests fail
+                }
             }
 
             // Turn the speakers on!
@@ -93,7 +97,7 @@ class AudioPlayer extends Component {
                     id="plyr-player"
                     ref={this.setRef}
                     data-type="youtube"
-                    data-video-id="vhqnIWyNV6c"
+                    data-video-id=""
                 ></div>
             </div>
         );
