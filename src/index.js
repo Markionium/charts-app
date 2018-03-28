@@ -49,6 +49,7 @@ refs.uiConfig = uiConfig;
 
     // app manager
 var appManager = new manager.AppManager(refs);
+appManager.getApiPath = () => '../../'; // The hacks are great in this one! :D
 appManager.sessionName = 'chart';
 appManager.apiVersion = 26;
 refs.appManager = appManager;
