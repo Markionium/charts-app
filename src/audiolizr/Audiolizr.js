@@ -24,6 +24,8 @@ import Dhis2nzLogo from './Dhis2nzLogo';
 import songs$ from './songs';
 import EnterYoutubeLink from './EnterYoutubeLink';
 import NowPlaying from './NowPlaying';
+import YouTubeSearchField from './YouTubeSearchField';
+import { Tunez, Tune } from './Tunez';
 
 player$.subscribe(song => window.console && console.log(song));
 
@@ -104,39 +106,6 @@ class AudioPlayer extends Component {
     }
 }
 
-const imgStyle = {
-    minWidth: 250,
-    minHeight: 250,
-};
-
-const titleStyle = {
-    fontSize: '1rem',
-};
-
-function Tune({ name, id, onTuneSelect }) {
-    return (
-        <Card className="audiolizr--tunes--tune" onClick={onTuneSelect}>
-            <CardMedia
-                overlay={<CardTitle title={name} titleStyle={titleStyle} />}
-            >
-                <img
-                    className="audiolizr--tunes--tune__image"
-                    style={imgStyle}
-                    src={`https://img.youtube.com/vi/${id}/0.jpg`}
-                />
-            </CardMedia>
-        </Card>
-    )
-}
-
-function Tunez({ songs }) {
-    return (
-        <div className="audiolizr--tunes">
-            {songs.map(song => (<Tune {...song} />))}
-        </div>
-    )
-}
-
 const customContentStyle = {
   width: '100%',
   maxWidth: 'none',
@@ -161,7 +130,11 @@ function Overlay({ open, actions, children, onRequestClose }) {
             </div>
             <div className="audiolizr--overlay--content">
                 <Title>Welcome from all of us at DHIS2! Pick a tune to get started :)</Title>
-                <EnterYoutubeLink onClose={onRequestClose} />
+                <YouTubeSearchField onTuneSelect={(song) => {
+                            playTune(song);
+                            global.refs.instanceManager.getById(song.favorite.id);
+                            onRequestClose();
+                        }} />
                 {children}
             </div>
         </div>
@@ -170,7 +143,7 @@ function Overlay({ open, actions, children, onRequestClose }) {
 
 function TunezControls({ open, onRequestClose, onListClick, songs, showTooltip }) {
     return (
-        <div>
+        <div className="tunez-controls">
             {showTooltip ? <div className="audiolizr--tooltip">
                 Analyse more data with 2NZ here!!!
                 <DownArrow color="white" style={{ width: '50px', height: '50px' }} />
@@ -182,12 +155,13 @@ function TunezControls({ open, onRequestClose, onListClick, songs, showTooltip }
                 open={open}
                 onRequestClose={onRequestClose}
                 actions={[
-                    <IconButton onClick={onRequestClose}>
+                    <IconButton key="Close" onClick={onRequestClose}>
                         <CloseIcon color="white" />
                     </IconButton>
                 ]}
             >
                 <div>
+                    <h1>Some of our favorites</h1>
                     <Tunez songs={songs} />
                 </div>
             </Overlay>

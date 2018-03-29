@@ -47,9 +47,25 @@ refs.chartConfig = chartConfig;
 var uiConfig = new config.UiConfig();
 refs.uiConfig = uiConfig;
 
+
+if (/localhost/.test(window.location.href) && window.location.port === "8081") {
+    console.log("Development mode");
+    jQuery.ajaxSetup({
+        headers: {
+            'Authorization': `Basic ${btoa('admin:district')}`
+        }
+    });
+}
+
     // app manager
 var appManager = new manager.AppManager(refs);
-appManager.getApiPath = () => '../../'; // The hacks are great in this one! :D
+appManager.getApiPath = () => {
+    if (/localhost/.test(window.location.href) && window.location.port === "8081") {
+        return 'https://play.dhis2.org/2.28/api';
+    } 
+
+    return '../../';
+};
 appManager.sessionName = 'chart';
 appManager.apiVersion = 26;
 refs.appManager = appManager;
@@ -151,7 +167,7 @@ function startApp() {
         localStorage.setItem('first-run-dhis2nz', true);
         setTimeout(() => {
             readyButton.style.opacity = 1;
-        }, 10000);
+        }, 1000);
     }
 
     window.initialize = initialize;
@@ -163,6 +179,10 @@ function startApp() {
                 readyButton.innerHTML = 'Loading...';
 
                 window.requestAnimationFrame(() => {
+                    const eggs = document.querySelector('#eggs');
+                    
+                    eggs.style.visibility = "visible";
+                    eggs.style.zIndex = 999;
                     initialize();
                 });
             });
