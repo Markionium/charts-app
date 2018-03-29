@@ -1,11 +1,11 @@
 {
-  "version": "27.0.3",
-  "name": "DHIS2NZ",
+  "version": "2.0.0",
+  "name": "dhis2nz2",
   "description": "Music for aggregate data",
   "icons": {},
   "developer": {
     "url": "http://www.dhis2.org",
-    "name": "The DHIS2NZ Team"
+    "name": "the dhis2nz2 Team"
   },
   "launch_path": "index.html",
   "default_locale": "en",

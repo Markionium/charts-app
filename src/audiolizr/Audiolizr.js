@@ -71,11 +71,15 @@ class AudioPlayer extends Component {
             if (!eventsSet) {
                 try {
                     player.on('play', function(event) {
-                        speakers.blastIt();
+                        if (noteHue != 'not started') {
+                            speakers.blastIt();
+                            $('.falling-notes').css('display', 'block');
+                        }
                     });
 
                     player.on('pause', function(event) {
                         speakers.beBoring();
+                        $('.falling-notes').css('display', 'none');
                     });
                 } catch (e) {
                     // No speakers when the requests fail
@@ -83,7 +87,8 @@ class AudioPlayer extends Component {
             }
 
             // Turn the speakers on!
-            setTimeout(() => speakers.blastIt(), 1500);
+            setTimeout(() => speakers.blastIt(), 8000);
+            startIntervals();
 
         } catch (e) {
             // When testing offline this will be called.... or when offline.. :P

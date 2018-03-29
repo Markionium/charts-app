@@ -21,7 +21,6 @@ export default function audiolizr(appManager) {
 
         musicNotes.innerHTML = notes;
 
-
         document.querySelector('body')
             .appendChild(musicNotes);
 

@@ -210,7 +210,7 @@ function initialize() {
     const audiolize2 = audiolize(i18n);
 
     // app manager
-    appManager.appName = i18n.data_visualizer || 'DHIS2NZ - Data Audiolizer';
+    appManager.appName = i18n.data_visualizer || 'dhis2nz2 - Data Audiolizer';
 
     instanceManager.setFn(function(layout) {
 
