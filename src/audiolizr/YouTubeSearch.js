@@ -1,3 +1,7 @@
+  import { Subject } from 'rxjs';
+
+  export const authSubject$ = new Subject();
+  
   /***** START BOILERPLATE CODE: Load client library, authorize user. *****/
 
   // Global variables for GoogleAuth object, auth status.
@@ -12,7 +16,8 @@
       return new Promise((resolve, reject) => {
         gapi.load('client:auth2', () => {
             initClient()
-                .then(resolve, reject);
+                .then(resolve)
+                .catch(reject);
         });
       });
   }
@@ -33,7 +38,13 @@
       GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
       // Handle initial sign-in state. (Determine if user is already signed in.)
-      setSigninStatus();
+      return setSigninStatus();
+    })
+    .then(() => {
+      if (isAuthorized) {
+        return Promise.resolve();
+      }
+      return Promise.reject();
     });
   }
 
@@ -50,14 +61,19 @@
     // Toggle button text and displayed statement based on current auth status.
     if (isAuthorized) {
         console.log('Ready to request data!');
+        return Promise.resolve();
     } else {
         console.log('Requesting permission!');
-        GoogleAuth.signIn();
+        return Promise.reject();
     }
   }
 
   function updateSigninStatus(isSignedIn) {
     setSigninStatus();
+
+    if (isSignedIn) {
+      authSubject.next(GoogleAuth.currentUser.get());
+    }
   }
 
   function createResource(properties) {
@@ -165,10 +181,16 @@ export function checkIfAuthorized() {
   if (!GoogleAuth) {
     return false;
   }
+  GoogleAuth = gapi.auth2.getAuthInstance();
   var user = GoogleAuth.currentUser.get();
+
+  if (user) {
+
+  }
+
   return user.hasGrantedScopes('https://www.googleapis.com/auth/youtube.readonly');
 }
 
 export function handleLogin() {
-  GoogleAuth.signIn();
+  return GoogleAuth.signIn().then((googleAccount) => console.log("account", googleAccount));
 }

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { favorites$ } from './favorites';
 import favHash from './favHash';
 import { Tunez } from './Tunez';
+import { authSubject$, handleLogin } from './YouTubeSearch';
 
 const searchSubject = new Subject();
 
@@ -84,6 +85,12 @@ export default class YouTubeSearchField extends React.Component {
             isAuthorized: checkIfAuthorized()
         });
 
+        askForGooglePermission()
+            .then(() => {
+                this.setState({ isAuthorized: true });
+            })
+            .catch(() => this.setState({ isAuthorized: false }));
+
         this.subscription = searchResults$
             .subscribe(tunez => {
                 this.setState({
@@ -97,15 +104,24 @@ export default class YouTubeSearchField extends React.Component {
                         }),
                 });
             });
+
+        this.authSubscription = authSubject$
+            .subscribe((user) => {
+                console.log('User from subject', user);
+                this.setState({
+                    isAuthorized: true,
+                });
+            });
     }
 
     componentWillUnMount() {
         this.subscription.dispose();
+        this.authSubscription.dispose();
     }
 
     render() {
         if (!this.state.isAuthorized) {
-            return <RaisedButton label="or login to YouTube to search!" onClick={this._authorize} />
+            return <RaisedButton label="or login to YouTube to search (you might need to allow popups and refresh)!" onClick={this._authorize} />
         }
 
         return (
@@ -124,17 +140,13 @@ export default class YouTubeSearchField extends React.Component {
                         fullWidth
                     />
                 </div>
-                {this.state.results.length ? <SearchResults tunez={this.state.results} /> : !this.state.search ? <div className="fourtyEightPadding">Type above to search</div> : <div className="fourtyEightPadding">Nothing found :(</div>}
+                {this.state.results.length ? <SearchResults tunez={this.state.results} /> : !this.state.search ? <div className="fourtyEightPadding">Type above to search</div> : null}
             </div>
         )
     }
 
     _authorize = () => {
-        askForGooglePermission()
-            .then(() => {
-                this.setState({ isAuthorized: true });
-            })
-            .catch(() => this.setState({ isAuthorized: false }));
+        handleLogin();
     }
 
     _setSearchValue = (event, value) => {
