@@ -115,8 +115,8 @@ export default class YouTubeSearchField extends React.Component {
     }
 
     componentWillUnMount() {
-        this.subscription.dispose();
-        this.authSubscription.dispose();
+        this.subscription.unsubscribe(); 
+        this.authSubscription.unsubscribe(); 
     }
 
     render() {
@@ -146,7 +146,12 @@ export default class YouTubeSearchField extends React.Component {
     }
 
     _authorize = () => {
-        handleLogin();
+        handleLogin()
+            .then(() => {
+                this.setState({
+                    isAuthorized: true,
+                });
+            })
     }
 
     _setSearchValue = (event, value) => {
