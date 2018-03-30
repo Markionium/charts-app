@@ -17,7 +17,6 @@ import mapPropsStream from 'recompose/mapPropsStream';
 import rxjsconfig from 'recompose/rxjsObservableConfig';
 import setObservableConfig from 'recompose/setObservableConfig';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import favHash from './favHash';
 import { favorites$ } from './favorites';
 import { playTune, player$ } from './player';
 import Dhis2nzLogo from './Dhis2nzLogo';

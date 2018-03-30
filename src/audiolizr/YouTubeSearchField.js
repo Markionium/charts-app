@@ -5,7 +5,6 @@ import { askForGooglePermission, searchYouTubeFor, checkIfAuthorized } from './Y
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { favorites$ } from './favorites';
-import favHash from './favHash';
 import { Tunez } from './Tunez';
 import { authSubject$, handleLogin } from './YouTubeSearch';
 

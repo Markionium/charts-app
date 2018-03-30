@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import { playTune } from './player';
-import modHash from './favHash';
 import { favorites$ } from './favorites';
 
 const loadSong = (callback) => (event, value) => {
@@ -12,7 +11,7 @@ const loadSong = (callback) => (event, value) => {
             .take(1)
             .do((v) => { console.log(v) })
             .map(favorites => {
-               const favoriteNumber = modHash(id, favorites.length);
+               const favoriteNumber = favHash(id, favorites.length);
 
                return favorites[favoriteNumber];
             })
