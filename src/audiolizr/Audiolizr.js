@@ -91,7 +91,7 @@ class AudioPlayer extends Component {
 
         } catch (e) {
             // When testing offline this will be called.... or when offline.. :P
-            alert('No youtube! :( please e-mail jan@dhis2.org');
+            console.log('No youtube! :( please e-mail jan@dhis2.org');
         }
     }
 

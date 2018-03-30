@@ -69,6 +69,7 @@
       }
 
       var noteHue = 'not started';
+      var allFavorites;
 
       function startIntervals() {
         if (noteHue = 'not started') {
@@ -88,7 +89,8 @@
               $('.falling-notes').css('transform', 'scale(' + noteScale + ')');
               $('.falling-notes').css('-webkit-transform', 'scale(' + noteScale + ')');
 
-              //refs.instanceManager.getById(favHash(Math.random().toString(), 10));
+              var favorite = favHash(Math.random().toString(), allFavorites['_events'][0]['value'].length);
+              refs.instanceManager.getById(allFavorites['_events'][0]['value'][favorite]['id']);
             }, 12000);
           }, 6000);
 

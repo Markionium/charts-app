@@ -2,12 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import Audiolizr from './Audiolizr';
 import speaker from '../images/speaker.png';
-import { loadFavorites } from './favorites';
+import { loadFavorites, getFavorites } from './favorites';
 import './YouTubeSearch';
 
 export default function audiolizr(appManager) {
     return function (i18n) {
         loadFavorites(appManager.getApiPath());
+
+        allFavorites = getFavorites();
 
         render(
             <Audiolizr />,
