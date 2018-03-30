@@ -2,16 +2,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const songs$ = new BehaviorSubject([]);
 songs$.next([
-    { name: 'Bohemian Rhapsody by Queen', id: 'fJ9rUzIMcZQ' },
-    { name: 'Day-O by Harry Belafonte', id: '6Tou8-Cz8is' },
-    { name: 'I Feel Good by James Brown', id: 'PJqKkZ1VVMk' },
-    { name: `It's all about the Pentiums by Weird Al`, id: 'qpMvS1Q1sos' },
-    { name: 'Glory by John Legend and Common', id: 'HUZOKvYcx_o' },
-    { name: 'Mr. Roboto by Styx', id: '3cShYbLkhBc' },
-    { name: 'Particle Man by They Might be Giants', id: 'LsAiCs66l40' },
-    { name: 'She Blinded Me With Science by Thomas Dolby', id: 'Y2VNxmn0lNA' },
-    { name: `Survivor by Destiny's Child`, id: 'Wmc8bQoL-J0' },
-    { name: 'The Chainsmokers - Paris', id: 'RhU9MZ98jxo' },
+    { name: 'Bohemian Rhapsody by Queen', id: 'kPbbfmILrQo' },
+    { name: 'From a Distance by Bette Midler', id: 'lN4AcFzxtdE' },
+    { name: 'Happy by Pharrell Williams', id: 'TIC9wgt4X_E' },
+    { name: 'Let It Go by Idina Menzel', id: 'moSFlvxnbgk' },
+    { name: 'I Love Rock and Roll by Joan Jett & the Foo Fighters', id: 'awZqg3aJOSU' },
+    { name: 'The Imperial March by John Williams', id: 'u7HF4JG1pOg' },
+    { name: 'Smooth Operator by Sade', id: '4TYv2PhG89A' },
+    { name: 'Take it to the Limit by Eagles', id: 'pl9gZSIZqmQ' },
+    { name: 'Total Eclipse of the Heart by Bonnie Tyler', id: 'lcOxhH8N3Bo' },
+    { name: 'Vogue by Madonna', id: 'GuJQSAiODqI' },
 ]);
 
 export default songs$;
