@@ -134,7 +134,7 @@ function Overlay({ open, actions, children, onRequestClose }) {
                 </div>
             </div>
             <div className="audiolizr--overlay--content">
-                <Title>Welcome from all of us at DHIS2! Pick a tune to get started :)</Title>
+                <Title>Welcome! Pick a tune to audiolize your data, and then click along with the beat!</Title>
                 <YouTubeSearchField onTuneSelect={(song) => {
                             playTune(song);
                             global.refs.instanceManager.getById(song.favorite.id);
@@ -166,7 +166,7 @@ function TunezControls({ open, onRequestClose, onListClick, songs, showTooltip }
                 ]}
             >
                 <div>
-                    <h1>Some of our favorites</h1>
+                    <h1>2nz we recommend:</h1>
                     <Tunez songs={songs} />
                 </div>
             </Overlay>

@@ -288,16 +288,16 @@ Ext overrides
 
 .x-toolbar.meringue.toolbar-north .x-toolbar-text.logo {
     color: transparent !important;
-    background: url('../images/dhis2nzlogo.png');
+    background: url('../images/dhis2nz2logo.png');
     background-size: 100px;
     background-repeat: no-repeat;
-    background-position-x: 10px;
+    background-position-x: 15px;
+    background-position-y: 5px;
 }
 
 .x-toolbar.meringue.toolbar-north .x-toolbar-text.logo .brand {
     color: transparent !important;
 }
-
 
 .x-mask {
     z-index: 950 !important;
@@ -381,6 +381,7 @@ Falling notes
     z-index: 30000;
     top: 25%;
     right: 30%;
+    background: black !important;
 }
 
 .nowplaying--header {
@@ -388,7 +389,7 @@ Falling notes
     display: flex;
     flex-direction: row;
     background-color: #1d5288;
-    padding: 2rem;
+    padding: 0;
     color: white;
     justify-content: center;
     align-items: center;

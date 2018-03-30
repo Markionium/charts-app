@@ -6,7 +6,7 @@ webpackBaseConfig.devServer = {
     inline: true,
 
     proxy: {
-        '/images/dhis2nzlogo.png': 'http://localhost:8081/src',
+        '/images/dhis2nz2logo.png': 'http://localhost:8081/src',
         '/images/musicnote.png': 'http://localhost:8081/src',
         '/images/speaker.png': 'http://localhost:8081/src',
         '/images/eggs.png': 'http://localhost:8081/src',
