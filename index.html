@@ -71,23 +71,31 @@
       var noteHue = 'not started';
 
       function startIntervals() {
-        setTimeout(function() {
-          $('.falling-notes').css('display', 'block');
-          noteHue = 0;
-          setInterval(function() {
-            noteHue++;
-            if (noteHue > 359) noteHue = 0;
-            $('.falling-notes').css('filter', 'hue-rotate(' + noteHue + 'deg)');
-            $('.falling-notes').css('-webkit-filter', 'hue-rotate(' + noteHue + 'deg)');
-          }, 100);
+        if (noteHue = 'not started') {
+          setTimeout(function() {
+            $('.falling-notes').css('display', 'block');
+            noteHue = 0;
+            setInterval(function() {
+              noteHue++;
+              if (noteHue > 359) noteHue = 0;
+              $('.falling-notes').css('filter', 'hue-rotate(' + noteHue + 'deg)');
+              $('.falling-notes').css('-webkit-filter', 'hue-rotate(' + noteHue + 'deg)');
+            }, 100);
 
-          setInterval(function() {
+            setInterval(function() {
+              var noteScale = 5 * Math.random();
+              noteHue = Math.floor(noteScale * 72);
+              $('.falling-notes').css('transform', 'scale(' + noteScale + ')');
+              $('.falling-notes').css('-webkit-transform', 'scale(' + noteScale + ')');
+            }, 12000);
+          }, 6000);
+
+          $(document.body).click(function() {
             var noteScale = 5 * Math.random();
-            noteHue = Math.floor(noteScale * 72);
             $('.falling-notes').css('transform', 'scale(' + noteScale + ')');
             $('.falling-notes').css('-webkit-transform', 'scale(' + noteScale + ')');
-          }, 12000);
-        }, 6000);
+          });
+        }
       }
     </script>
         <!--<iframe width="853" height="480" src="https://www.youtube.com/embed/z6TPoZ6LEi8?rel=0&amp;showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>-->
