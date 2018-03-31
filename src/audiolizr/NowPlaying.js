@@ -29,7 +29,7 @@ export default mapPropsStream(props$ =>
                         <Paper key={song.id} className="nowplaying">
                             <div className="nowplaying--header">
                                 <h1>Now Playing on</h1>
-                                <img src="images/dhis2nzlogo.png" />
+                                <img src="images/dhis2nz2logo.png" />
                             </div>
                             <img
                                 style={imgStyle}

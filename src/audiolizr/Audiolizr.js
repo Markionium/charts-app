@@ -149,7 +149,7 @@ function TunezControls({ open, onRequestClose, onListClick, songs, showTooltip }
     return (
         <div className="tunez-controls">
             {showTooltip ? <div className="audiolizr--tooltip">
-                Analyse more data with 2NZ here!!!
+                Analyse more data with dhis2nz2 here!!!
                 <DownArrow color="white" style={{ width: '50px', height: '50px' }} />
             </div>: null}
             <IconButton onClick={onListClick} style={{ width: '75px', width: '75px' }} iconStyle={{ width: '50px', height: '50px' }}>

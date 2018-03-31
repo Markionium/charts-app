@@ -41,7 +41,7 @@
         player = new YT.Player('player', {
           height: '480',
           width: '853',
-          videoId: 'z6TPoZ6LEi8',
+          videoId: 'GgOkaY50fB0',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -73,6 +73,7 @@
 
       function startIntervals() {
         if (noteHue = 'not started') {
+          $('.speaker').css('display', 'block');
           setTimeout(function() {
             $('.falling-notes').css('display', 'block');
             noteHue = 0;

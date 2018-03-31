@@ -111,6 +111,7 @@ body {
     animation-duration: .5s;
     animation-iteration-count: infinite;
     transition: .5s left linear;
+    display: none;
 }
 
 .speaker img {
